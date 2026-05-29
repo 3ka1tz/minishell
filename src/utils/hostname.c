@@ -50,7 +50,7 @@ char	*hostname(char **env)
 	home = getenv("HOME");
 	if (!getcwd(cwd, sizeof(cwd)))
 		return (perror("Error: Couldn't get current working directory"), NULL);
-	size = ft_strlen(user) + ft_strlen("minishell") + ft_strlen(cwd) + 4;
+	size = ft_strlen(user) + ft_strlen("minishell") + ft_strlen(cwd) + 64;
 	name = malloc(size);
 	if (!name)
 		return (perror("Error: Memory allocation failed for hostname"), NULL);

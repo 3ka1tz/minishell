@@ -1,18 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iullibar <iullibar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 11:57:14 by elopez-u          #+#    #+#             */
-/*   Updated: 2025/05/12 11:56:06 by iullibar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/minishell.h"
 
 int	g_status = 0;
+
+static void	init_mini(t_mini *mini, char **envp)
+{
+	mini->env = copy_env(envp);
+	mini->input = NULL;
+	mini->tokens = NULL;
+	mini->nodes = NULL;
+	mini->nbr_nodes = 0;
+}
 
 void	mini_loop(t_mini *mini)
 {
@@ -25,26 +22,25 @@ void	mini_loop(t_mini *mini)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
 	t_mini	*mini;
 
 	(void)argv;
 	if (argc != 1)
 	{
-		write(2, "\033[31mError: Incorrect number of arguments\n\033[0m", 47);
-		return (EXIT_FAILURE);
+		ft_putstr_fd("Error: Wrong number of arguments\n", 2);
+		return (1);
 	}
-	mini = malloc(sizeof(t_mini));
+	mini = malloc(sizeof(*mini));
 	if (!mini)
 	{
-		write(2, "\033[31mError: Memory allocation failed\n\033[0m", 42);
-		return (EXIT_FAILURE);
+		perror("minishell: malloc");
+		return (1);
 	}
-	print_minishell();
-	init_mini(mini);
-	mini->env = copy_env(env);
+	ft_putstr_fd("Minishell by elopez-u and iullibar\n", 1);
+	init_mini(mini, envp);
 	handle_signals();
 	mini_loop(mini);
-	return (EXIT_SUCCESS);
+	return (0);
 }

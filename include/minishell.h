@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: elopez-u <elopez-u@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 11:56:49 by elopez-u          #+#    #+#             */
-/*   Updated: 2025/05/16 11:58:44 by elopez-u         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -49,7 +37,6 @@ void		mini_loop(t_mini *mini);
 void		handle_signals(void);
 
 // INITIALIZATION
-void		init_mini(t_mini *mini);
 char		**copy_env(char **env);
 void		init_input(t_mini *mini);
 char		*read_input(const char *hostname);
@@ -64,7 +51,6 @@ void		quotes_remover(char **tokens);
 // NODES
 void		create_nodes(t_mini *mini);
 t_node		*new_node(t_mini *mini, char **tokens);
-void		init_node(t_node *node);
 char		**set_cmd(char **tokens, int count, int i, int j);
 void		set_paths(t_node *node, char **env, int i);
 int			set_in_out_file(t_node *node, char **tok, int in_fd, int out_fd);
@@ -91,7 +77,6 @@ void		free_mini(t_mini *mini);
 int			has_quotes(char	*token);
 int			is_builtin(char *cmd);
 void		open_quotes(char c, int *sq, int *dq);
-void		print_minishell(void);
 void		update_exit_status(t_mini *mini);
 void		ft_error(t_mini *mini);
 void		ft_error_tok(t_mini *mini);

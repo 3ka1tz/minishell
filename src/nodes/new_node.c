@@ -12,6 +12,18 @@
 
 #include "../../include/minishell.h"
 
+static void	init_node(t_node *node)
+{
+	if (!node)
+		return ;
+	node->full_cmd = NULL;
+	node->full_path = NULL;
+	node->infile = -1;
+	node->outfile = -1;
+	node->is_exec = 0;
+	node->pid = -1;
+}
+
 t_node	*new_node(t_mini *mini, char **tokens)
 {
 	t_node	*node;

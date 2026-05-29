@@ -12,13 +12,13 @@
 
 #include "../../include/minishell.h"
 
-char	**copy_env(char **env)
+char	**copy_env(char **envp)
 {
 	size_t	i;
 	char	**env_copy;
 
 	i = 0;
-	while (env[i])
+	while (envp[i])
 		i++;
 	env_copy = malloc(sizeof(char *) * (i + 1));
 	if (!env_copy)
@@ -27,9 +27,9 @@ char	**copy_env(char **env)
 		exit(EXIT_FAILURE);
 	}
 	i = 0;
-	while (env[i])
+	while (envp[i])
 	{
-		env_copy[i] = ft_strdup(env[i]);
+		env_copy[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	env_copy[i] = NULL;
